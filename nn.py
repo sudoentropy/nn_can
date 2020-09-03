@@ -18,7 +18,7 @@ from tensorflow.keras.layers.experimental.preprocessing import CategoryEncoding
 
 
 # load df
-df = pd.read_csv("", sep=",")
+df = pd.read_csv("aug_3_new_genes.csv", sep=",")
 
 
 # split train and test data
@@ -100,41 +100,38 @@ def encode_integer_categorical_feature(feature, name, dataset):
 
 
 # categorical features coded as binary integers
-gender = keras.Input(shape=(1,), name="gender", dtype="int64")
+male = keras.Input(shape=(1,), name="male", dtype="int64")
+event = keras.Input(shape=(1,), name="event", dtype="int64")
+duration = keras.Input(shape=(1,), name="duration", dtype="int64")
+LRP1B = keras.Input(shape=(1,), name="LRP1B", dtype="int64")
+KMT2C = keras.Input(shape=(1,), name="KMT2C", dtype="int64")
+BRAF = keras.Input(shape=(1,), name="BRAF", dtype="int64")
+RYR2 = keras.Input(shape=(1,), name="RYR2", dtype="int64")
 tp53 = keras.Input(shape=(1,), name="tp53", dtype="int64")
-SMAD4 = keras.Input(shape=(1,), name="SMAD4", dtype="int64")
-CDKN2A = keras.Input(shape=(1,), name="CDKN2A", dtype="int64")
-KRAS = keras.Input(shape=(1,), name="KRAS", dtype="int64")
-G12V = keras.Input(shape=(1,), name="G12V", dtype="int64")
-G12D = keras.Input(shape=(1,), name="G12D", dtype="int64")
-G12R = keras.Input(shape=(1,), name="G12R", dtype="int64")
-
 
 # numerical features
 age = keras.Input(shape=(1,), name="age")
 
 all_inputs = [
-    gender,
-    age,
+    male,
+    event,
+    LRP1B,
+    KMT2C,
+    BRAF,
+    RYR2,
     tp53,
-    SMAD4,
-    CDKN2A,
-    KRAS,
-    G12V,
-    G12R,
-    G12D,
+    age,
 ]
 
 
 # binary integer categorical features
-gender_encoded = encode_numerical_feature(gender, "gender", train_ds)
+male_encoded = encode_numerical_feature(male, "male", train_ds)
+event_encoded = encode_numerical_feature(event, "event", train_ds)
+LRP1B_encoded = encode_numerical_feature(LRP1B, "LRP1B", train_ds)
+KMT2C_encoded = encode_numerical_feature(KMT2C, "KMT2C", train_ds)
+BRAF_encoded = encode_numerical_feature(BRAF, "BRAF", train_ds)
+RYR2_encoded = encode_numerical_feature(RYR2, "RYR2", train_ds)
 tp53_encoded = encode_numerical_feature(tp53, "tp53", train_ds)
-SMAD4_encoded = encode_numerical_feature(SMAD4, "SMAD4", train_ds)
-CDKN2A_encoded = encode_numerical_feature(CDKN2A, "CDKN2A", train_ds)
-KRAS_encoded = encode_numerical_feature(KRAS, "KRAS", train_ds)
-G12V_encoded = encode_numerical_feature(G12V, "G12V", train_ds)
-G12D_encoded = encode_numerical_feature(G12D, "G12D", train_ds)
-G12R_encoded = encode_numerical_feature(G12R, "G12R", train_ds)
 
 
 # numerical features
@@ -143,15 +140,13 @@ age_encoded = encode_numerical_feature(age, "age", train_ds)
 
 all_features = layers.concatenate(
     [
-        gender_encoded,
+        male_encoded,
+        event_encoded,
+        LRP1B_encoded,
+        KMT2C_encoded,
+        BRAF_encoded,
+        RYR2_encoded,
         tp53_encoded,
-        SMAD4_encoded,
-        CDKN2A_encoded,
-        KRAS_encoded,
-        G12V_encoded,
-        G12D_encoded,
-        G12R_encoded,
-        age_encoded,
     ]
 )
 
