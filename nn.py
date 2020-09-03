@@ -22,7 +22,7 @@ df = pd.read_csv("", sep=",")
 
 
 # split train and test data
-val_df = df.sample(frac=0.1, random_state=133780085)
+val_df = df.sample(frac=0.1, random_state=337885)
 train_df = df.drop(val_df.index)
 
 print(
