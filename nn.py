@@ -1,6 +1,7 @@
 """
 running cancer data through a neural network
 based on the structured data classification tutorial on keras.io
+firing up testing again
 """
 
 
